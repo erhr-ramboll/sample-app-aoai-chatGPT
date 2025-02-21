@@ -343,6 +343,9 @@ class _AzureSearchSettings(BaseSettings, DatasourcePayloadConstructor):
             self._settings.azure_openai.extract_embedding_dependency()
         parameters = self.model_dump(exclude_none=True, by_alias=True)
         parameters.update(self._settings.search.model_dump(exclude_none=True, by_alias=True))
+
+        # ADD FOLDER PRIORITY SCORING PROFILE (ERHR)
+        parameters["scoringProfile"] = "folder-priority-profile"
         
         return {
             "type": self._type,
